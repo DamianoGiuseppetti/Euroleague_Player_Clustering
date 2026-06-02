@@ -1,0 +1,85 @@
+# EuroLeague Players Cluster Analysis
+### Redefining Positions Through Unsupervised Learning
+
+Basketball positions — point guard, center, forward — were designed for a different era. This project asks a simpler question: **what do EuroLeague players actually look like in the data?** Using model-based clustering on five seasons of player stats, we let the numbers define the positions.
+
+Inspired by Kalman & Bosch (2019), *"NBA Lineup Analysis on Clustered Player Tendencies"*.
+
+---
+
+## The Data
+
+The dataset covers **EuroLeague player-seasons from 2020/2021 to 2024/2025** and was assembled from three sources:
+
+- **Player stats** (basic, advanced, per-100 possessions) — collected via the [`euroleague_api`](https://github.com/giasemidis/euroleague_api) Python package
+- **Shot zone profiles** — shot-by-shot data aggregated into five spatial zones (corner 3, above-the-break 3, mid-range, short, at-rim) from the same API
+- **Player heights** — scraped from Proballers and merged using fuzzy name matching to handle spelling variations across seasons
+
+The three sources were joined on a player-season key, producing **956 player-seasons** across 20 statistical features. After filtering to players averaging ≥ 12 minutes per game (the standard "rotation player" threshold), **856 player-seasons** enter the model.
+
+> Raw data, ingestion scripts, and preprocessing pipelines are intentionally excluded from this repository. Only the cleaned, analysis-ready dataset is included.
+
+---
+
+## Methodology
+
+1. **Filter** — drop players below 12 min/game to avoid unreliable rate stats
+2. **Scale** — StandardScaler (z-score) so all 20 variables are on equal footing
+3. **K-Means** — run as a baseline; silhouette analysis as expected favours few clusters
+4. **GMM** — Gaussian Mixture Model with BIC-based model selection across 4 covariance types and up to 12 components; best model: **4 components, full covariance**
+5. **Profile** — box plots of scaled variables per cluster, cluster means table, example players
+6. **Soft assignment** — each player gets a probability vector, not just a hard label
+
+---
+
+## Results
+
+The model identifies **four play-style positions**:
+
+| Cluster | Name | N | Defining traits | Example players |
+|---------|------|---|-----------------|-----------------|
+| 0 | **Perimeter Shooter** | 291 | High 3FGA%, Corner 3FGA%, FGA volume; low paint activity | Will Clyburn, Nigel Hayes-Davis, Sasha Vezenkov, Shavon Shields, Mario Hezonja |
+| 1 | **Ball Handler** | 301 | High usage, assist ratio; shortest players, fewest rebounds | Alexey Shved, Shane Larkin, Mike James, Lorenzo Brown, Vasilije Micic |
+| 2 | **Two-Way Forward** | 184 | High OReb%, DReb%, block rate, paint FGA%; low 3-point rate | Vladimir Lucic, John Brown III, Jaylen Hoard, Zach Leday, Jordan Mickey |
+| 3 | **Rim Protector** | 80 | Dominant at-rim FGA%, elite block rate, zero 3FG attempts | Mathias Lessort, Georgios Papagiannis, Jan Vesely, Walter Tavares, Kyle Hines |
+
+Cluster separation is sharp: **92.9%** of player-seasons have a max cluster probability above 0.9. Only 7 players sit meaningfully between two clusters.
+
+---
+
+## How to Run
+
+```bash
+# 1. Clone the repo
+git clone https://github.com/your-username/euroleague-clustering.git
+cd euroleague-clustering
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Open the notebook
+jupyter notebook notebooks/Cluster_Analysis_code.ipynb
+```
+
+The notebook is self-contained — just run all cells top to bottom.
+
+---
+
+## Repository Structure
+
+```
+├── notebooks/
+│   └── Cluster_Analysis_code.ipynb   # Main analysis
+├── data/
+│   └── processed/
+│       ├── final_dataset_2020_2024.csv   # Model input (856 player-seasons, 20 features)
+│       └── clustered_players.csv         # Model output with cluster assignments
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## What's Next
+
+A **Streamlit dashboard** is in the works — interactive filters by season, team, and cluster, with player-level deep dives and evolution tracking across seasons.
