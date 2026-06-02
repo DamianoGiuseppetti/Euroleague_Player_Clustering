@@ -38,10 +38,10 @@ The model identifies **four play-style positions**:
 
 | Cluster | Name | N | Defining traits | Example players |
 |---------|------|---|-----------------|-----------------|
-| 0 | **Perimeter Shooter** | 291 | High 3FGA%, Corner 3FGA%, FGA volume; low paint activity | Will Clyburn, Nigel Hayes-Davis, Sasha Vezenkov, Shavon Shields, Mario Hezonja |
-| 1 | **Ball Handler** | 301 | High usage, assist ratio; shortest players, fewest rebounds | Alexey Shved, Shane Larkin, Mike James, Lorenzo Brown, Vasilije Micic |
-| 2 | **Two-Way Forward** | 184 | High OReb%, DReb%, block rate, paint FGA%; low 3-point rate | Vladimir Lucic, John Brown III, Jaylen Hoard, Zach Leday, Jordan Mickey |
-| 3 | **Rim Protector** | 80 | Dominant at-rim FGA%, elite block rate, zero 3FG attempts | Mathias Lessort, Georgios Papagiannis, Jan Vesely, Walter Tavares, Kyle Hines |
+| 0 | **Perimeter Shooter** | 291 | High 3FGA%, Corner 3FGA%, FGA volume; low paint activity | Will Clyburn (22/23), Nigel Hayes-Davis (23/24), Sasha Vezenkov (21/22), Shavon Shields (21/22), Mario Hezonja (21/22) |
+| 1 | **Ball Handler** | 301 | High usage, assist ratio; shortest players, fewest rebounds | Alexey Shved (20/21), Shane Larkin (21/22), Mike James (23/24), Lorenzo Brown (22/23), Vasilije Micic (22/23) |
+| 2 | **Two-Way Forward** | 184 | High OReb%, DReb%, block rate, paint FGA%; low 3-point rate | Vladimir Lucic (20/21), John Brown III (21/22), Jaylen Hoard (24/25), Zach Leday (23/24), Jordan Mickey (20/21) |
+| 3 | **Rim Protector** | 80 | Dominant at-rim FGA%, elite block rate, zero 3FG attempts | Mathias Lessort (22/23), Georgios Papagiannis (21/22), Jan Vesely (20/21), Walter Tavares (20/21), Kyle Hines (20/21) |
 
 Cluster separation is sharp: **92.9%** of player-seasons have a max cluster probability above 0.9. Only 7 players sit meaningfully between two clusters.
 
@@ -83,4 +83,3 @@ The notebook is self-contained — just run all cells top to bottom.
 ## What's Next
 
 A **Streamlit dashboard** is in the works — interactive filters by season, team, and cluster, with player-level deep dives and evolution tracking across seasons.
-# Euroleague_Player_Clustering
