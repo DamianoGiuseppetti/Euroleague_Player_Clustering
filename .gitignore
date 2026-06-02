@@ -43,6 +43,12 @@ secrets.*
 .vscode/
 .idea/
 
+# Reference PDFs — intentionally excluded
+Complete Variables List (European Metrics).pdf
+Euroleague Data Architecture & Usage Guide.pdf
+Euroleague Players List (2024-2025) _ Proballers.pdf
+NBA vs Euroleague Metrics Comparison.pdf
+
 # Misc
 Variables.numbers
 *.numbers
