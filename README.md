@@ -51,35 +51,64 @@ Cluster separation is sharp: **92.9%** of player-seasons have a max cluster prob
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/your-username/euroleague-clustering.git
-cd euroleague-clustering
+git clone https://github.com/DamianoGiuseppetti/Euroleague_Player_Clustering.git
+cd Euroleague_Player_Clustering
 
 # 2. Install dependencies
 pip install -r requirements.txt
 
-# 3. Open the notebook
+# 3a. Open the notebook
 jupyter notebook notebooks/Cluster_Analysis_code.ipynb
+
+# 3b. ...or launch the interactive dashboard
+streamlit run streamlit_app.py
 ```
 
 The notebook is self-contained — just run all cells top to bottom.
 
 ---
 
+## Interactive Dashboard
+
+A multipage **Streamlit dashboard** lets you explore the clustering results without touching code:
+
+| Page | What it shows |
+|------|---------------|
+| 🏀 **League Hub** | Season KPIs, the PCA archetype landscape, league leaders, and quick player search |
+| 🪪 **Player Profile** | One-pager scouting card: 0-100 skill ratings, auto-awarded badges, percentile radar, shot diet vs league, GMM soft-assignment, most similar players |
+| ⚖️ **Compare** | 2–4 player-seasons head-to-head: winner-highlighted stat matrix + radar overlay |
+| 🧭 **Replacement Finder** | Statistical doppelgängers of any player (distance on the 20 z-scored model features), with archetype/season/team filters |
+| 📊 **Rankings** | Filterable leaderboards on per-game production or skill ratings |
+| 🗺️ **Archetypes** | The four cluster fingerprints: overlaid radars, blurbs, purest examples |
+| 🛡️ **Teams** | Roster construction by archetype: minute mix vs league average + full roster table |
+
+Run locally with `streamlit run streamlit_app.py`, or try the live version on Streamlit Community Cloud (link coming soon).
+
+---
+
 ## Repository Structure
 
 ```
+├── streamlit_app.py                  # Dashboard entry point (navigation)
+├── .streamlit/
+│   └── config.toml                   # Light EuroLeague theme
+├── app_pages/                        # Dashboard pages
+│   ├── home.py                       # League Hub
+│   ├── player_profile.py
+│   ├── compare.py
+│   ├── replacement_finder.py
+│   ├── rankings.py
+│   ├── archetypes.py
+│   └── teams.py
+├── src/
+│   └── dashboard_utils.py            # Design system, ratings, badges, charts, similarity
 ├── notebooks/
 │   └── Cluster_Analysis_code.ipynb   # Main analysis
 ├── data/
 │   └── processed/
 │       ├── final_dataset_2020_2024.csv   # Model input (856 player-seasons, 20 features)
-│       └── clustered_players.csv         # Model output with cluster assignments
+│       ├── clustered_players.csv         # Model output with cluster assignments
+│       └── player_stats_pergame.csv      # Readable per-game stats for the dashboard
 ├── requirements.txt
 └── README.md
 ```
-
----
-
-## What's Next
-
-A **Streamlit dashboard** is in the works — interactive filters by season, team, and cluster, with player-level deep dives and evolution tracking across seasons.
