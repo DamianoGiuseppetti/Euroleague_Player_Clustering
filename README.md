@@ -1,6 +1,8 @@
 # EuroLeague Players Cluster Analysis
 ### Redefining Positions Through Unsupervised Learning
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://euroleagueplayerclustering-lpruwy66gmgpethhjqqy4r.streamlit.app/)
+
 Basketball positions — point guard, center, forward — were designed for a different era. This project asks a simpler question: **what do EuroLeague players actually look like in the data?** Using model-based clustering on five seasons of player stats, we let the numbers define the positions.
 
 Inspired by Kalman & Bosch (2019), *"NBA Lineup Analysis on Clustered Player Tendencies"*.
@@ -82,7 +84,7 @@ A multipage **Streamlit dashboard** lets you explore the clustering results with
 | 🗺️ **Archetypes** | The four cluster fingerprints: overlaid radars, blurbs, purest examples |
 | 🛡️ **Teams** | Roster construction by archetype: minute mix vs league average + full roster table |
 
-Run locally with `streamlit run streamlit_app.py`, or try the live version on Streamlit Community Cloud (link coming soon).
+Run locally with `streamlit run streamlit_app.py`, or **[try the live app on Streamlit Community Cloud](https://euroleagueplayerclustering-lpruwy66gmgpethhjqqy4r.streamlit.app/)**.
 
 ---
 
